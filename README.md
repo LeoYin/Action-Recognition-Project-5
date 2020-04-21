@@ -18,6 +18,7 @@ Then, moving the data file into the data file and rename is as 'videos'
 ```
 $ cd data/
 $ python3 extract_frames.py   # Extracts frames from the video
+$ python3 extract_pose.py     # Extracts pose from the annotation file 
 ```
 
 ## ConvLSTM
@@ -28,17 +29,20 @@ The model is composed of:
 * A convolutional feature extractor (ResNet-101) which provides a latent representation of video frames
 * A bi-directional LSTM classifier which based on the latent representation of the video predicts the activity depicted
 
-I have made a trained model available [here](https://drive.google.com/open?id=1EWprDnL2XCGIhBW8tpx5NC-Y0eHuW5ot).
+I have made a trained model available [here](https://drive.google.com/open?id=1EPcPCyXz92_689_dCqcWtjycSLCDdbd-).
 
 ### Train  
 
 ```
 $ python3 train.py  --dataset_path  \
+                    --pose_path  \
                     --num_epochs  \
-                    --batch_size \
-                    --sequence_length \
-                    --img_dim \
-                    --latent_dim
+                    --batch_size  \
+                    --sequence_length  \
+                    --img_dim  \
+                    --latent_dim  \
+                    --latent_dim 2  \
+                    
 ```
 
 ### Test on Video
@@ -48,7 +52,9 @@ Download the testing videos into the file test/test_videos/, and download the ta
 
 ```
 $ python3 test_on_video.py  --video_path  \
-                            --checkpoint_model 
+                            --pose_path  \
+                            --save_path  \
+                            --checkpoint_model  
 ```
 
 
